@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Static Template</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1 id="time">time</h1>
-    <div id="score">score</div>
-    <div id="question_container">
-<p id="question"></p>
+    <div id="container">
+      <div id="qu-heading">
+        <h1>
+          Time:
+          <h1 id="time">Time</h1>
+        </h1>
+        <h1>
+          Score:
+          <h1 id="score"></h1>
+        </h1>
+      </div>
+      <div id="question_container">
+        <div id="q_container">
 
-  <ol>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ol>
-      
+          <p id="number"></p>
+          .
+          <p id="question"></p>
+        </div>
+
+        <ol>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
     </div>
-  <script src="index.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>

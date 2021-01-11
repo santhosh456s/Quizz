@@ -29,6 +29,7 @@ function Question(question, answer, option) {
 }
 
 let time = 0;
+let question_number = 0;
 
 let questions = [
   new Question("In Java array are", "Object", [
@@ -66,7 +67,7 @@ let handelClick = function (event) {
     console.log("wroung");
   }
 
-  let currentScore = +document.getElementById("score").innerHTML;
+  let currentScore  =  +document.getElementById("score").innerHTML;
   let score = currentQuestion.calculateScore(event.target.innerHTML, time);
   currentScore = parseInt(score);
   console.log(currentScore);
@@ -90,6 +91,9 @@ function updatequestion() {
 
 const startGame = function () {
   time = 0;
+
+  question_number++;
+  document.getElementById("number").innerHTML = question_number;
   document.getElementById("time").innerHTML = 10 - time;
 
   let timerid = setInterval(() => {
