@@ -1,43 +1,52 @@
+//foctory function
 
+// function makeQuestion(question, answer, option) {
+//   return {
+//     question: question,
+//     answer: answer,
+//     option: option,
+//     isCurret: function (choice) {
+//       return this.answer.toString() === choice;
+//     },
+//     calculateScore: function (choice, timetaken) {
+//       if (!this.isCurret(this, choice)) return 0;
+//       return (1 / timetaken) * 1000;
+//     }
+//   };
+// }
 
-function makeQuestion(question,answer,option){
-  return{
-question : question,
-answer : answer,
-option : option,
-isCurret : function (choice) {
-  return this.answer.toString() === choice;
-},
-calculateScore : function (choice, timetaken) {
-  if (!this.isCurret(this, choice)) return 0;
-  return (1 / timetaken) * 1000;
-}
-
-  }
+function Question(question, answer, option) {
+  this.question = question;
+  this.answer = answer;
+  this.option = option;
+  this.isCurret = function (choice) {
+    return this.answer.toString() === choice;
+  };
+  this.calculateScore = function (choice, timetaken) {
+    if (!this.isCurret(choice)) return 0;
+    return (1 / timetaken) * 100;
+  };
 }
 
 let time = 0;
 
 let questions = [
-  
-    makeQuestion( "In Java array are",
-     "Object",
-     [
-      "Object Refrence",
-      "Object",
-      "Primitive data type",
-      "none of the above"
-    ])
- ,
-  
-    makeQuestion("When you pass the array into the method,the method receives _______","Copy of the array",
+  new Question("In Java array are", "Object", [
+    "Object Refrence",
+    "Object",
+    "Primitive data type",
+    "none of the above"
+  ]),
+  new Question(
+    "When you pass the array into the method,the method receives _______",
+    "Copy of the array",
     [
       "refrence of the array",
       "Copy of the array",
       "Length of the array",
       "A copy of the first element"
-    ])
-  
+    ]
+  )
 ];
 
 let currentQuestionIndex = -1;
@@ -49,7 +58,7 @@ let handelClick = function (event) {
     return;
   }
   currentQuestion.answered = true;
-  if (currentQuestion.isCurret( event.target.innerHTML)) {
+  if (currentQuestion.isCurret(event.target.innerHTML)) {
     event.target.className = "correct";
     console.log("right");
   } else {
@@ -58,37 +67,28 @@ let handelClick = function (event) {
   }
 
   let currentScore = +document.getElementById("score").innerHTML;
-  let score = currentScore.calculateScore(
-    
-    event.target.innerHTML,
-    time
-  );
-
+  let score = currentQuestion.calculateScore(event.target.innerHTML, time);
   currentScore = parseInt(score);
-  //parseInt('currentScore');
   console.log(currentScore);
   document.getElementById("score").innerHTML = currentScore;
 };
 
 function updatequestion() {
   currentQuestionIndex++;
-  let { question,  option } = questions[
-    currentQuestionIndex
-  ];
+  let { question, option } = questions[currentQuestionIndex];
 
   let questionEl = document.getElementById("question");
-  questionEl.innerHTML =  question;
+  questionEl.innerHTML = question;
 
   let optionEl = document.getElementsByTagName("li");
   for (let i = 0; i < optionEl.length; i++) {
-    optionEl[i].innerHTML =  option[i];
+    optionEl[i].innerHTML = option[i];
     optionEl[i].className = " ";
     optionEl[i].addEventListener("click", handelClick);
   }
 }
 
 const startGame = function () {
-  
   time = 0;
   document.getElementById("time").innerHTML = 10 - time;
 
